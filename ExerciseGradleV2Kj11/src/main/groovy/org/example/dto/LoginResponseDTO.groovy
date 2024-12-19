@@ -25,4 +25,75 @@ class LoginResponseDTO {
     private String password;
     private List<PhoneDTO> phones;
 
+    UUID getId() {
+        return id
+    }
+
+    void setId(UUID id) {
+        this.id = id
+    }
+
+    LocalDate getCreated() {
+        return created
+    }
+
+    void setCreated(LocalDate created) {
+        this.created = created
+    }
+
+    LocalDate getLastLogin() {
+        return lastLogin
+    }
+
+    void setLastLogin(LocalDate lastLogin) {
+        this.lastLogin = lastLogin
+    }
+
+    String getToken() {
+        return token
+    }
+
+    void setToken(String token) {
+        this.token = token
+    }
+
+    boolean getIsActive() {
+        return isActive
+    }
+
+    void setIsActive(boolean isActive) {
+        this.isActive = isActive
+    }
+
+    String getName() {
+        return name
+    }
+
+    void setName(String name) {
+        this.name = name
+    }
+
+    String getEmail() {
+        return email
+    }
+
+    void setEmail(String email) {
+        this.email = email
+    }
+
+    String getPassword() {
+        return password
+    }
+
+    void setPassword(String password) {
+        this.password = password
+    }
+
+    List<PhoneDTO> getPhones() {
+        return phones
+    }
+
+    void setPhones(List<PhoneDTO> phones) {
+        this.phones = phones
+    }
 }

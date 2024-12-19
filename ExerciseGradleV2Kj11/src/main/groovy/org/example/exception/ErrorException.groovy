@@ -17,4 +17,27 @@ class ErrorException {
     private int codigo;
     private String detail;
 
+    Timestamp getTimestamp() {
+        return timestamp
+    }
+
+    void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp
+    }
+
+    int getCodigo() {
+        return codigo
+    }
+
+    void setCodigo(int codigo) {
+        this.codigo = codigo
+    }
+
+    String getDetail() {
+        return detail
+    }
+
+    void setDetail(String detail) {
+        this.detail = detail
+    }
 }

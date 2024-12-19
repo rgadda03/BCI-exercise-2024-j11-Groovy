@@ -16,4 +16,35 @@ class RegisterRequestDTO {
     private String password;
     private List<PhoneDTO> phones; //opcional
 
+    String getName() {
+        return name
+    }
+
+    void setName(String name) {
+        this.name = name
+    }
+
+    String getEmail() {
+        return email
+    }
+
+    void setEmail(String email) {
+        this.email = email
+    }
+
+    String getPassword() {
+        return password
+    }
+
+    void setPassword(String password) {
+        this.password = password
+    }
+
+    List<PhoneDTO> getPhones() {
+        return phones
+    }
+
+    void setPhones(List<PhoneDTO> phones) {
+        this.phones = phones
+    }
 }

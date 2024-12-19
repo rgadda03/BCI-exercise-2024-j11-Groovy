@@ -13,4 +13,11 @@ class ErrorGeneralException {
 
     private List<ErrorException> error;
 
+    List<ErrorException> getError() {
+        return error
+    }
+
+    void setError(List<ErrorException> error) {
+        this.error = error
+    }
 }

@@ -48,4 +48,47 @@ class PhoneEntity {
         + ", country_code=" + country_code + "]";
     }
 
+    static long getSerialVersionUID() {
+        return serialVersionUID
+    }
+
+    UUID getPhone_id() {
+        return phone_id
+    }
+
+    void setPhone_id(UUID phone_id) {
+        this.phone_id = phone_id
+    }
+
+    Long getNumber() {
+        return number
+    }
+
+    void setNumber(Long number) {
+        this.number = number
+    }
+
+    int getCity_code() {
+        return city_code
+    }
+
+    void setCity_code(int city_code) {
+        this.city_code = city_code
+    }
+
+    String getCountry_code() {
+        return country_code
+    }
+
+    void setCountry_code(String country_code) {
+        this.country_code = country_code
+    }
+
+    UserEntity getUser() {
+        return user
+    }
+
+    void setUser(UserEntity user) {
+        this.user = user
+    }
 }

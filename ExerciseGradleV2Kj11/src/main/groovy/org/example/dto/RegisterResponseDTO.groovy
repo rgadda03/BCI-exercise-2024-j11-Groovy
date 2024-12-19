@@ -21,4 +21,43 @@ class RegisterResponseDTO {
     @JsonProperty("isActive")
     private boolean isActive;
 
+    UUID getId() {
+        return id
+    }
+
+    void setId(UUID id) {
+        this.id = id
+    }
+
+    LocalDate getCreated() {
+        return created
+    }
+
+    void setCreated(LocalDate created) {
+        this.created = created
+    }
+
+    LocalDate getLastLogin() {
+        return lastLogin
+    }
+
+    void setLastLogin(LocalDate lastLogin) {
+        this.lastLogin = lastLogin
+    }
+
+    String getToken() {
+        return token
+    }
+
+    void setToken(String token) {
+        this.token = token
+    }
+
+    boolean getIsActive() {
+        return isActive
+    }
+
+    void setIsActive(boolean isActive) {
+        this.isActive = isActive
+    }
 }

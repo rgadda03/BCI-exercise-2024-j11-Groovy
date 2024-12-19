@@ -78,4 +78,80 @@ class UserEntity {
         + ", "+ phoneString + "]";
     }
 
+    static long getSerialVersionUID() {
+        return serialVersionUID
+    }
+
+    UUID getUser_id() {
+        return user_id
+    }
+
+    void setUser_id(UUID user_id) {
+        this.user_id = user_id
+    }
+
+    @Nullable
+    String getName() {
+        return name
+    }
+
+    void setName(@Nullable String name) {
+        this.name = name
+    }
+
+    String getEmail() {
+        return email
+    }
+
+    void setEmail(String email) {
+        this.email = email
+    }
+
+    String getPassword() {
+        return password
+    }
+
+    void setPassword(String password) {
+        this.password = password
+    }
+
+    LocalDate getCreated() {
+        return created
+    }
+
+    void setCreated(LocalDate created) {
+        this.created = created
+    }
+
+    LocalDate getLast_login() {
+        return last_login
+    }
+
+    void setLast_login(LocalDate last_login) {
+        this.last_login = last_login
+    }
+
+    String getToken() {
+        return token
+    }
+
+    void setToken(String token) {
+        this.token = token
+    }
+
+    boolean getIsactive() {
+        return isactive
+    }
+
+    void setIsactive(boolean isactive) {
+        this.isactive = isactive
+    }
+
+    List<PhoneEntity> getPhones() {
+        return phones
+    }
+
+    void setPhones(List<PhoneEntity> phones) {
+        this.phones = phones
+    }
 }

@@ -15,4 +15,27 @@ class PhoneDTO {
     private int citycode;
     private String countrycode;
 
+    long getNumber() {
+        return number
+    }
+
+    void setNumber(long number) {
+        this.number = number
+    }
+
+    int getCitycode() {
+        return citycode
+    }
+
+    void setCitycode(int citycode) {
+        this.citycode = citycode
+    }
+
+    String getCountrycode() {
+        return countrycode
+    }
+
+    void setCountrycode(String countrycode) {
+        this.countrycode = countrycode
+    }
 }
