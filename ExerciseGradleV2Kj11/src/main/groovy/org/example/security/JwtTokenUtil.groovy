@@ -2,6 +2,8 @@ package org.example.security
 
 import io.jsonwebtoken.Claims
 import org.springframework.stereotype.Component
+import io.jsonwebtoken.Jwts
+import io.jsonwebtoken.SignatureAlgorithm
 
 import java.util.function.Function
 
@@ -20,9 +22,17 @@ class JwtTokenUtil {
 
     private String generarTokenDJwts(String subject) {
         Map<String, Object> claims = new HashMap<>();
-        return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
-                .signWith(SignatureAlgorithm.HS512, secret).compact();
+        String jwtsResult = null;
+        try{
+            jwtsResult = Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
+                    .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
+                    .signWith(SignatureAlgorithm.HS512, secret).compact();
+        } catch (Exception e){
+            String a = '1'
+        }
+
+
+        return jwtsResult;
     }
 
     private Claims getAllClaimsFromToken(String token) {

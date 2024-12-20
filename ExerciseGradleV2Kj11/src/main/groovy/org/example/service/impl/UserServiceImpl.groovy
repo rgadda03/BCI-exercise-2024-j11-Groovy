@@ -1,6 +1,7 @@
 package org.example.service.impl
 
 import groovy.util.logging.Slf4j
+import lombok.AllArgsConstructor
 import org.example.dto.ErrorGeneralDTO
 import org.example.dto.ErrorValidacionDTO
 import org.example.dto.LoginResponseDTO
@@ -13,6 +14,7 @@ import org.example.exception.SuperErrorException
 import org.example.repository.PhoneRepository
 import org.example.repository.UserRepository
 import org.example.security.JwtTokenUtil
+import org.example.util.JasyptEncryptorConfig
 import org.example.util.RequestValidator
 import org.jasypt.encryption.StringEncryptor
 import org.springframework.beans.factory.annotation.Autowired
@@ -72,7 +74,7 @@ class UserServiceImpl implements UserService{
                 throw new ErrorGeneralDTO(3, "error al validar si existe mail en la base - "+e.toString());
             }
 
-            if ( userEntityOptional.isPresent() ) {
+            if ( userEntityOptional!=null && userEntityOptional.isPresent() ) {
                 //existe el valor
                 log.error("sign-up - ese email ya esta registrado");
                 throw new ErrorValidacionDTO(4, "Ese email ya esta registrado.");
@@ -86,16 +88,15 @@ class UserServiceImpl implements UserService{
             String jwt = jwtTokenUtil.generarToken(request.getEmail());
 
             //crear variable
-            UserEntity userEntity = UserEntity.builder()
-                    .name(request.getName())
-                    .email(request.getEmail())
-                    .password(passwordEncrypt)
-                    .created(LocalDate.now())
-                    .last_login(null)
-                    .token(jwt)
-                    .isactive(true)
-                    .phones(new ArrayList<>())
-                    .build();
+            UserEntity userEntity = new UserEntity()
+            userEntity.setName(request.getName())
+            userEntity.setEmail(request.getEmail())
+            userEntity.setPassword(passwordEncrypt)
+            userEntity.setCreated(LocalDate.now())
+            userEntity.setLast_login(null)
+            userEntity.setToken(jwt)
+            userEntity.setIsactive(true)
+            userEntity.setPhones(new ArrayList<>())
 
             //se guarda en base H2 - funcion hecha
             UserEntity userEntitySaved = null;
@@ -112,12 +113,11 @@ class UserServiceImpl implements UserService{
                 for (Iterator iterator = phones.iterator(); iterator.hasNext();) {
                     PhoneDTO phoneRequestDTO = (PhoneDTO) iterator.next();
 
-                    phoneEntity = PhoneEntity.builder()
-                            .number(phoneRequestDTO.getNumber())
-                            .city_code(phoneRequestDTO.getCitycode())
-                            .country_code(phoneRequestDTO.getCountrycode())
-                            .user(userEntitySaved)
-                            .build();
+                    phoneEntity = new PhoneEntity()
+                    phoneEntity.setNumber(phoneRequestDTO.getNumber())
+                    phoneEntity.setCity_code(phoneRequestDTO.getCitycode())
+                    phoneEntity.setCountry_code(phoneRequestDTO.getCountrycode())
+                    phoneEntity.setUser(userEntitySaved)
 
                     PhoneEntity phoneEntitySaved = phoneRepository.save(phoneEntity);
                 }
@@ -127,13 +127,12 @@ class UserServiceImpl implements UserService{
 
 
             //armar respuesta
-            RegisterResponseDTO response = RegisterResponseDTO.builder()
-                    .id(userEntitySaved.getUser_id())
-                    .created(userEntitySaved.getCreated())
-                    .lastLogin(userEntitySaved.getLast_login())
-                    .token(userEntitySaved.getToken())
-                    .isActive(userEntitySaved.isIsactive())
-                    .build();
+            RegisterResponseDTO response = new RegisterResponseDTO()
+            response.setId(userEntitySaved.getUser_id())
+            response.setCreated(userEntitySaved.getCreated())
+            response.setLastLogin(userEntitySaved.getLast_login())
+            response.setToken(userEntitySaved.getToken())
+            response.setIsActive(userEntitySaved.isactive)
 
             log.info("sign-up - Fin ServiceImpl");
 

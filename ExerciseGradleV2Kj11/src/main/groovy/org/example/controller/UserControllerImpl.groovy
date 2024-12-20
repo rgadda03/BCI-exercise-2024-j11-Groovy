@@ -26,10 +26,6 @@ class UserControllerImpl {
 
         log.info("sign-up - Inicio ControllerImpl");
 
-        List<PhoneDTO> phones = new ArrayList<>();
-        PhoneDTO phone = PhoneDTO.builder().number("number").citycode("citycode").contrycode("contrycode").build();
-        RegisterRequestDTO req2 = RegisterRequestDTO.builder().name("name").email("email").password("password").phones(phones).build();
-
         RegisterResponseDTO response = userService.signUp(request);
 
         log.info("sign-up - Fin ControllerImpl");

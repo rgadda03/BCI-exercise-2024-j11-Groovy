@@ -3,6 +3,7 @@ package org.example.exception
 import org.example.dto.ErrorGeneralDTO
 import org.example.dto.ErrorValidacionDTO
 import org.springframework.http.HttpHeaders
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -18,9 +19,13 @@ class AppExceptionHandler {
 
         Instant instanteActual = Instant.now();
 
-        ErrorException errorTechnicalException = new ErrorException(Timestamp.from(instanteActual),errorDTO.getCodigo(),errorDTO.getDetail());
-        ErrorGeneralException technicalException = new ErrorGeneralException();
-        technicalException.setError(new ArrayList<>());
+        ErrorException errorTechnicalException = new ErrorException()
+        errorTechnicalException.setTimestamp(Timestamp.from(instanteActual))
+        errorTechnicalException.setCodigo(errorDTO.getCodigo())
+        errorTechnicalException.setDetail(errorDTO.getDetail())
+
+        ErrorGeneralException technicalException = new ErrorGeneralException()
+        technicalException.setError(new ArrayList<>())
         technicalException.getError().add(errorTechnicalException);
         return new ResponseEntity<>(technicalException,new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
@@ -30,10 +35,15 @@ class AppExceptionHandler {
 
         Instant instanteActual = Instant.now();
 
-        ErrorException errorTechnicalException = new ErrorException(Timestamp.from(instanteActual),errorDTO.getCodigo(),errorDTO.getDetail());
+        ErrorException errorTechnicalException = new ErrorException();
+        errorTechnicalException.setTimestamp(Timestamp.from(instanteActual));
+        errorTechnicalException.setCodigo(errorDTO.getCodigo());
+        errorTechnicalException.setDetail(errorDTO.getDetail());
+
         ErrorGeneralException technicalException = new ErrorGeneralException();
         technicalException.setError(new ArrayList<>());
         technicalException.getError().add(errorTechnicalException);
+
         return new ResponseEntity<>(technicalException,new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
