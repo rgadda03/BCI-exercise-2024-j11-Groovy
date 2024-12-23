@@ -169,21 +169,20 @@ class UserServiceImpl implements UserService{
             log.info("login - email obtenido: {}", email);
 
             //conseguir datos dado el email
-            Optional<UserEntity> userEntityOptional =  null;
+            UserEntity userEntity = new UserEntity()
             try {
-                userEntityOptional = userRepository.findByEmail(email);
-                log.info("login -  la busqueda por el email es [{}]", userEntityOptional.toString());
+                userEntity = userRepository.findByEmail(email);
+                log.info("login -  la busqueda por el email es [{}]", userEntity.toString());
             } catch (RuntimeException e) {
                 log.error("login - error al conseguir informacion del user es -  detalle:[{}]",e.toString());
                 throw new ErrorGeneralDTO(3, "error al conseguir informacion del user es "+e.toString());
             }
 
-            if (userEntityOptional.isEmpty()) {
+            if (UserEntity == null) {
                 log.error("login - ese email no esta registrado en el sistema");
                 throw new ErrorValidacionDTO(4, "ese email no esta registrado en el sistema.");
             }
 
-            UserEntity userEntity = userEntityOptional.get();
             if (!userEntity.getToken().equals(token)) {
                 log.error("login - el jwt no es mas valido");
                 throw new ErrorValidacionDTO(5, "el jwt no es mas valido.");
@@ -194,7 +193,7 @@ class UserServiceImpl implements UserService{
 
             //actualizar base de datos
             try {
-                userRepository.actualizarTokenYLastLoginPorEmail(jwt, email, LocalDate.now());
+                userRepository.actualizarTokenYLastLoginPorEmail(jwt, LocalDate.now(), email);
                 log.info("login -  update de token exitoso");
             } catch (RuntimeException e) {
                 log.error("login - update de token con error: [{}] ", e.getMessage());
@@ -203,17 +202,8 @@ class UserServiceImpl implements UserService{
 
             //armar respuesta
             StringEncryptor stringEncryptor = JasyptEncryptorConfig.passwordEncryptor();
-            LoginResponseDTO response = LoginResponseDTO.builder()
-                    .id(userEntity.getUser_id())
-                    .created(userEntity.getCreated())
-                    .lastLogin(LocalDate.now())
-                    .token(jwt)
-                    .isActive(userEntity.isIsactive())
-                    .name(userEntity.getName())
-                    .email(userEntity.getEmail())
-                    .password(stringEncryptor.decrypt(userEntity.getPassword()))
-                    .phones(convertirEntityAPhone(userEntity.getPhones()))
-                    .build();
+            //reemplaza lo de arriba por un new con todo
+            LoginResponseDTO response = new LoginResponseDTO(userEntity.getUser_id(), userEntity.getCreated(), LocalDate.now(), jwt, userEntity.isIsactive(), userEntity.getName(), userEntity.getEmail(), stringEncryptor.decrypt(userEntity.getPassword()), convertirEntityAPhone(userEntity.getPhones()));
             System.out.println(response.toString());
 
             log.info("login - Fin ServiceImpl");
@@ -226,7 +216,7 @@ class UserServiceImpl implements UserService{
         }
     }
 
-    private List<PhoneDTO> convertirEntityAPhone (List<PhoneEntity> phonesRequest){
+    private static List<PhoneDTO> convertirEntityAPhone (List<PhoneEntity> phonesRequest){
 
         List<PhoneDTO> list =  null;
         if (phonesRequest != null) {
@@ -234,11 +224,7 @@ class UserServiceImpl implements UserService{
             for (Iterator iterator = phonesRequest.iterator(); iterator.hasNext();) {
                 PhoneEntity phoneEntity = (PhoneEntity) iterator.next();
 
-                PhoneDTO temp = PhoneDTO.builder()
-                        .number(phoneEntity.getNumber())
-                        .citycode(phoneEntity.getCity_code())
-                        .countrycode(phoneEntity.getCountry_code())
-                        .build();
+                PhoneDTO temp = new PhoneDTO(phoneEntity.getNumber(), phoneEntity.getCity_code(), phoneEntity.getCountry_code());
                 list.add(temp);
             }
         }

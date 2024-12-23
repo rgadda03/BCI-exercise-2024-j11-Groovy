@@ -25,6 +25,19 @@ class LoginResponseDTO {
     private String password;
     private List<PhoneDTO> phones;
 
+    LoginResponseDTO(UUID id, LocalDate created, LocalDate lastLogin, String token,
+                boolean isActive, String name, String email, String password, List<PhoneDTO> phones) {
+        this.id = id
+        this.created = created
+        this.lastLogin = lastLogin
+        this.token = token
+        this.isActive = isActive
+        this.name = name
+        this.email = email
+        this.password = password
+        this.phones = phones
+    }
+
     UUID getId() {
         return id
     }
@@ -96,4 +109,5 @@ class LoginResponseDTO {
     void setPhones(List<PhoneDTO> phones) {
         this.phones = phones
     }
+
 }

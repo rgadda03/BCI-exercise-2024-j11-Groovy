@@ -139,7 +139,7 @@ class UserEntity {
         this.token = token
     }
 
-    boolean getIsactive() {
+    boolean isIsactive() {
         return isactive
     }
 
@@ -154,4 +154,5 @@ class UserEntity {
     void setPhones(List<PhoneEntity> phones) {
         this.phones = phones
     }
+
 }

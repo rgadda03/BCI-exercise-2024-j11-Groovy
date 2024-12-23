@@ -15,6 +15,15 @@ class PhoneDTO {
     private int citycode;
     private String countrycode;
 
+    PhoneDTO() {
+    }
+
+    PhoneDTO(long number, int citycode, String countrycode) {
+        this.number = number
+        this.citycode = citycode
+        this.countrycode = countrycode
+    }
+
     long getNumber() {
         return number
     }
