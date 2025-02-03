@@ -1,14 +1,14 @@
 package org.example.dto
 
-class ClaimData {
+class ClaimDataDTO {
 
     private Date expierationDate
     private String email
 
-    ClaimData() {
+    ClaimDataDTO() {
     }
 
-    ClaimData(Date expierationDate, String email) {
+    ClaimDataDTO(Date expierationDate, String email) {
         this.expierationDate = expierationDate
         this.email = email
     }

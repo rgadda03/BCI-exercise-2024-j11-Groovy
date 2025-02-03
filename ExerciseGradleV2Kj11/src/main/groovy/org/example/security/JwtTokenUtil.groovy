@@ -1,7 +1,7 @@
 package org.example.security
 
 import io.jsonwebtoken.Claims
-import org.example.dto.ClaimData
+import org.example.dto.ClaimDataDTO
 import org.springframework.stereotype.Component
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
@@ -34,22 +34,22 @@ class JwtTokenUtil {
         return jwtsResult;
     }
 
-    private ClaimData getAllClaimsFromToken(String token) {
+    private ClaimDataDTO getAllClaimsFromToken(String token) {
         Claims response = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
-        ClaimData responseData = new ClaimData();
+        ClaimDataDTO responseData = new ClaimDataDTO();
         responseData.setExpierationDate((Date) response.getExpiration());
         responseData.setEmail(response.getSubject());
         return responseData
     }
 
     public Boolean isTokenExpirado(String token) {
-        ClaimData datos = getAllClaimsFromToken(token);
+        ClaimDataDTO datos = getAllClaimsFromToken(token);
         final Date expiration = datos.getExpierationDate();
         return expiration.before(new Date());
     }
 
     public String getEmailFromJwt(String token) {
-        ClaimData datos = getAllClaimsFromToken(token);
+        ClaimDataDTO datos = getAllClaimsFromToken(token);
         return datos.getEmail();
     }
 
