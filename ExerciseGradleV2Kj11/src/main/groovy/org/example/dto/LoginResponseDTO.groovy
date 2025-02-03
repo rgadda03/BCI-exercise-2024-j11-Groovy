@@ -25,8 +25,11 @@ class LoginResponseDTO {
     private String password;
     private List<PhoneDTO> phones;
 
+    LoginResponseDTO() {
+    }
+
     LoginResponseDTO(UUID id, LocalDate created, LocalDate lastLogin, String token,
-                boolean isActive, String name, String email, String password, List<PhoneDTO> phones) {
+                     boolean isActive, String name, String email, String password, List<PhoneDTO> phones) {
         this.id = id
         this.created = created
         this.lastLogin = lastLogin

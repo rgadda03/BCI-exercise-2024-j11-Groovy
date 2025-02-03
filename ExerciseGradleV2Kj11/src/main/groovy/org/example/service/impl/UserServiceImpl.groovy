@@ -27,14 +27,18 @@ import java.time.LocalDate
 @Slf4j
 class UserServiceImpl implements UserService{
 
-    @Autowired
     private RequestValidator requestValidator;
-    @Autowired
     private UserRepository userRepository;
-    @Autowired
     private JwtTokenUtil jwtTokenUtil;
-    @Autowired
     private PhoneRepository phoneRepository;
+
+    @Autowired
+    UserServiceImpl(RequestValidator requestValidator, UserRepository userRepository, JwtTokenUtil jwtTokenUtil, PhoneRepository phoneRepository) {
+        this.requestValidator = requestValidator
+        this.userRepository = userRepository
+        this.jwtTokenUtil = jwtTokenUtil
+        this.phoneRepository = phoneRepository
+    }
 
     @Override
     public RegisterResponseDTO signUp(RegisterRequestDTO request) throws SuperErrorException {

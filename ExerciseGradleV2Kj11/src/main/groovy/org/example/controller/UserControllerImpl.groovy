@@ -18,8 +18,12 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class UserControllerImpl {
 
-    @Autowired
     private UserService userService;
+
+    @Autowired
+    UserControllerImpl(UserService userService) {
+        this.userService = userService
+    }
 
     @PostMapping("/sign-up")
     public RegisterResponseDTO signUp(@RequestBody RegisterRequestDTO request) throws SuperErrorException {
