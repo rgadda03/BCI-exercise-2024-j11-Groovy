@@ -1,7 +1,6 @@
 package org.example.service.impl
 
 import groovy.util.logging.Slf4j
-import lombok.AllArgsConstructor
 import org.example.dto.ErrorGeneralDTO
 import org.example.dto.ErrorValidacionDTO
 import org.example.dto.LoginResponseDTO

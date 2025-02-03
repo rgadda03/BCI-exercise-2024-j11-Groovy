@@ -44,8 +44,7 @@ class PhoneEntity {
 
     @Override
     public String toString() {
-        return "PhoneEntity [phone_id=" + phone_id + ", number=" + number + ", city_code=" + city_code
-        + ", country_code=" + country_code + "]";
+        return "PhoneEntity [phone_id=" + phone_id + ", number=" + number + ", city_code=" + city_code+ ", country_code=" + country_code + "]";
     }
 
     static long getSerialVersionUID() {

@@ -73,9 +73,7 @@ class UserEntity {
         }
         phoneString+=") ";
 
-        return "UserEntity [user_id=" + user_id + ", name=" + name + ", email=" + email + ", password=" + password
-        + ", created=" + created + ", last_login=" + last_login + ", token=" + token + ", isactive=" + isactive
-        + ", "+ phoneString + "]";
+        return "UserEntity [user_id=" + user_id + ", name=" + name + ", email=" + email + ", password=" + password+ ", created=" + created + ", last_login=" + last_login + ", token=" + token + ", isactive=" + isactive+ ", "+ phoneString + "]";
     }
 
     static long getSerialVersionUID() {

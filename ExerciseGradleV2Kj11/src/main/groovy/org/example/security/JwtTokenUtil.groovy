@@ -6,8 +6,6 @@ import org.springframework.stereotype.Component
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 
-import java.util.function.Function
-
 @Component
 class JwtTokenUtil {
 

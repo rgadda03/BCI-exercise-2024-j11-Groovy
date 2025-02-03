@@ -2,7 +2,6 @@ package org.example.controller
 
 import groovy.util.logging.Slf4j
 import org.example.dto.LoginResponseDTO
-import org.example.dto.PhoneDTO
 import org.example.dto.RegisterRequestDTO
 import org.example.dto.RegisterResponseDTO
 import org.example.exception.SuperErrorException
